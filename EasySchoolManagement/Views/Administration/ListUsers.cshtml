@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h2>All Users</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <a asp-action="Register" asp-controller="Account" class="btn btn-success btn-sm mb-3">
+        Create New User
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Role Name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td style="width: 40%">@user.UserName</td>
+                <td class="text-right">
+                    <form asp-action="DeleteUser" asp-controller="Administration" asp-route-id="@user.Id">
+                        <a asp-controller="Administration" asp-action="EditUser" asp-route-id="@user.Id"
+                           class="btn btn-sm btn-primary">Edit</a>
+
+                        <span id="confirmDeleteSpan_@user.Id" style="display: none">
+                            <span>Are you sure you want to delete?</span>
+                            <button type="submit" class="btn btn-sm btn-danger">Yes</button>
+                            <a onclick="onConfirmDelete('@user.Id',false)" class="btn btn-sm btn-info text-light">No</a>
+                        </span>
+                        <span id="deleteSpan_@user.Id">
+                            <a onclick="onConfirmDelete('@user.Id',true)" class="btn btn-sm btn-danger text-light">Delete</a>
+                        </span>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-header">
+            No User Created Yet
+        </div>
+        <div class="card-body">
+            <h4>Use the button below to create user.</h4>
+            <a asp-action="Register" asp-controller="Account" class="btn btn-success btn-sm mb-3">
+                Create New User
+            </a>
+        </div>
+    </div>
+
+}
+

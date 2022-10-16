@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+}
+
+
+@if (ViewBag.ErrorTitle == null)
+{
+    <h3>Error Occured! The support team will fix this soon.</h3>
+    <h5>Please contact to naim@shadow.com</h5>
+}else{
+    <h3 class="text-danger">@ViewBag.ErrorTitle</h3>
+    <h6 class="text-danger">@ViewBag.ErrorMsg</h6>
+}

@@ -1,0 +1,110 @@
+﻿@model StudentCreateViewModel
+@using EasySchoolManagement.Enums
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<div class="row mt-5">
+    <div class="col-md-10">
+        <h2>Add New Student</h2>
+    </div>
+    <div class="col-md-2 text-lg-right">
+        <a asp-action="Index" class="btn btn-dark btn-sm mt-3">Back to List</a>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="SaveStudent">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name"/>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name"/>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RegistrationNo" class="control-label"></label>
+                        <input asp-for="RegistrationNo" class="form-control" placeholder="Enter Registration No"/>
+                        <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CurrentClass" class="control-label"></label>
+                        <select asp-for="CurrentClass" asp-items="Html.GetEnumSelectList<Class>()" class="form-control">
+                            <option value="">Select Class</option>
+                        </select>
+                        <span asp-validation-for="CurrentClass" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                            <option value="">Select Gender</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" class="form-control" placeholder="Enter Student Age"/>
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ContactNo" class="control-label"></label>
+                        <input asp-for="ContactNo" class="form-control" placeholder="Enter Phone Number"/>
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter Student Email"/>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" placeholder="Enter Student Address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-dark btn-block " />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

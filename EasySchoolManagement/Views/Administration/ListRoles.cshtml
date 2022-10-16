@@ -1,0 +1,57 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "All Roles";
+}
+
+<h2>All Roles</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <a asp-action="CreateRole" asp-controller="Administration" class="btn btn-success btn-sm mb-3">
+        Create New Role
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Role Name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td style="width: 40%">@role.NormalizedName</td>
+                <td class="text-right">
+                    <form asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id">
+                        <a asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id"
+                           class="btn btn-sm btn-primary">Edit</a>
+
+                        <span id="confirmDeleteSpan_@role.Id" style="display: none">
+                            <span>Are you sure you want to delete?</span>
+                            <button type="submit" class="btn btn-sm btn-danger">Yes</button>
+                            <a onclick="onConfirmDelete('@role.Id',false)" class="btn btn-sm btn-info text-light">No</a>
+                        </span>
+                        <span id="deleteSpan_@role.Id">
+                            <a onclick="onConfirmDelete('@role.Id',true)" class="btn btn-sm btn-danger text-light">Delete</a>
+                        </span>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>  
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-header">
+            No Role Created Yet
+        </div>
+        <div class="card-body">
+            <h4>Use the button below to create role.</h4>
+            <a asp-action="CreateRole" asp-controller="Administration" class="btn btn-success btn-sm mb-3">
+                Create New Role
+            </a>
+        </div>
+    </div>
+}

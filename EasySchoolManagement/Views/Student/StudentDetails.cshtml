@@ -1,0 +1,45 @@
+﻿@model StudentDetailViewModel
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="card mt-5">
+    <div class="card-header">
+        <h3 class="font-weight-bolder">@Model.FullName</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><b>Class:</b> @Model.CurrentClass</h5>
+                <h5><b>Registration No:</b> @Model.RegistrationNo</h5>
+                <h5><b>Email:</b> @Model.Email</h5>
+                <h5><b>Address:</b> @Model.Address</h5>
+                <h5><b>Added By:</b> @Model.CreatedBy</h5>
+            </div>
+            <div class="col-md-6">
+                <h5><b>Admission Date:</b> @Model.CreatedDate.ToShortDateString()</h5>
+                <h5><b>Gender:</b> @Model.Gender</h5>
+                <h5><b>Contact No:</b> @Model.ContactNo</h5>
+                <h5><b>Age:</b> @Model.Age</h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-right">
+
+        <form asp-action="DeleteStudent" asp-route-id="@Model.Id">
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            <a asp-action="UpdateStudent" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+
+            <span id="confirmDeleteSpan_@Model.Id" style="display: none">
+                <span>Are you sure you want to delete?</span>
+                <button type="submit" class="btn btn-danger">Yes</button>
+                <a onclick="onConfirmDelete('@Model.Id',false)" class="btn btn-info text-light">No</a>
+            </span>
+            <span id="deleteSpan_@Model.Id">
+                <a onclick="onConfirmDelete('@Model.Id',true)" class="btn btn-danger text-light">Delete</a>
+            </span>
+        </form>
+
+    </div>
+</div>
